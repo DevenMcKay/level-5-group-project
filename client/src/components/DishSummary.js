@@ -1,7 +1,16 @@
 import React from "react"
 
 function DishSummary(props) {
-  const { dish } = props
+  const { dish, isChef } = props
+
+  function chefButtons() {
+    return (isChef ?
+      <div className="summary-button-container">
+        <button>&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
+        <button>Delete</button></div> : null)
+  }
+
+
   return (
     console.log(props),
     <div className="dish-summary">
@@ -9,6 +18,7 @@ function DishSummary(props) {
       <div className="dish-summary-text">
         <h1>{dish.name}</h1>
         <p>{dish.summary}</p>
+        {chefButtons()}
       </div>
     </div>
   )
