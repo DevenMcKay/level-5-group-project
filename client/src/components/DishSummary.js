@@ -1,27 +1,30 @@
-import React from "react"
+import React from "react";
 
 function DishSummary(props) {
-  const { dish, isChef } = props
+  const { dish, isChef } = props;
 
   function chefButtons() {
-    return (isChef ?
+    return isChef ? (
       <div className="summary-button-container">
         <button>&nbsp;&nbsp;Edit&nbsp;&nbsp;</button>
-        <button>Delete</button></div> : null)
+        <button>Delete</button>
+      </div>
+    ) : null;
   }
-
 
   return (
     console.log(props),
-    <div className="dish-summary">
-      <img src={dish.image} alt={dish.name}></img>
-      <div className="dish-summary-text">
-        <h1>{dish.name}</h1>
-        <p>{dish.summary}</p>
-        {chefButtons()}
+    (
+      <div className="dish-summary">
+        <img src={dish.image} alt={dish.name}></img>
+        <div className="dish-summary-text">
+          <h1>{dish.name}</h1>
+          <p>{dish.summary}</p>
+          {chefButtons()}
+        </div>
       </div>
-    </div>
-  )
+    )
+  );
 }
 
-export default DishSummary
+export default DishSummary;
