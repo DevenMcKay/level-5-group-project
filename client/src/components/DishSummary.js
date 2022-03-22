@@ -12,15 +12,15 @@ function DishSummary(props) {
 
 
   return (
-    console.log(props),
-    <div className="dish-summary">
+    // console.log(props),
+    <section className="dish-summary">
       <img src={dish.image} alt={dish.name}></img>
       <div className="dish-summary-text">
         <h1>{dish.name}</h1>
         <p>{dish.summary}</p>
-        {chefButtons()}
+        {/* {chefButtons()} */}
       </div>
-    </div>
+    </section>
   )
 }
 

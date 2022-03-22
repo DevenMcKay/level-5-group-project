@@ -1,5 +1,5 @@
 import './App.css';
-import React,{ useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Nav from "./components/Nav"
 import Home from "./Home"
 import Search from "./Search"
@@ -13,7 +13,7 @@ import staticData from "./components/staticData"
 function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
-  const [selectDish, setSelectDish] = useState()
+  const [selectDish, setSelectDish] = useState(dishes[1])
 
   useEffect(() => {
     // axios.get({staticData})
@@ -26,9 +26,9 @@ function App() {
       <Nav />
       <div className='background-image'>
         <Routes>
-          <Route path="/" element={<Home setIsChef={setIsChef}/>} />
-          <Route path="/search" element={<Search dishes={dishes} isChef={isChef}/>} />
-          <Route path="/dish" element={<Dish dish={selectDish} isChef={isChef}/>} />
+          <Route path="/" element={<Home setIsChef={setIsChef} />} />
+          <Route path="/search" element={<Search dishes={dishes} isChef={isChef} setSelectDish={() => console.log("Dishselected")} />} />
+          <Route path="/dish" element={<Dish dish={selectDish} isChef={isChef} />} />
           <Route path="*" element={(<><Error /><Home /></>)} />
         </Routes>
       </div>
