@@ -5,10 +5,16 @@ import { Link } from "react-router-dom"
 export default function Nav() {
   return (
     <nav>
-      <Link to={"/"}><img src={modLogo} className="header" alt="Pollo Logo"></img></Link>
+      <Link to={"/"}>
+        <img src={modLogo} className="header" alt="Los Pollo Logo"></img>
+      </Link>
       <div>
-        <Link to={"/"}><button>User</button></Link>
-        <Link to={"/search"}><button>Search</button></Link>
+        <Link to={"/"}>
+          <button>User</button>
+        </Link>
+        <Link to={"/search"}>
+          <button>Search</button>
+        </Link>
       </div>
     </nav>
   )

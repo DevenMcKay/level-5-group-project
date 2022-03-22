@@ -1,9 +1,9 @@
 import React from "react"
-import DishSummary from "./components/DishSummary"
+import DishSummary from "./components/dishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
-  const { dishes, isChef } = props
+  const { dishes, isChef, setSelectDish} = props
 
   function welcome() {
     return (isChef ?
@@ -22,10 +22,11 @@ function Search(props) {
       </form>
       {dishes ? <>
         {dishes.map(dish =>
-          <Link to="/dish">
-            <DishSummary key={dish._id} dish={dish} isChef={isChef} />
+          <Link to="/dish" key={dish._id} onClick={setSelectDish(dishes._id)}>
+            <DishSummary dish={dish} isChef={isChef}/>
           </Link>)}
       </> : null}
+      <button>Add Item</button>
     </div>
   )
 }
