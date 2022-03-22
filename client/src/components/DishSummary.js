@@ -12,7 +12,6 @@ function DishSummary(props) {
 
 
   return (
-    // console.log(props),
     <section className="dish-summary">
       <img src={dish.image} alt={dish.name}></img>
       <div className="dish-summary-text">
