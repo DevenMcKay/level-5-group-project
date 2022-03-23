@@ -9,9 +9,7 @@ function dishIngredients(props) {
     )
   }
 
-
   return (
-    // console.log(dish),
     <section>
       <h2>Ingredients</h2>
       {dish.ingredients.map(item => {

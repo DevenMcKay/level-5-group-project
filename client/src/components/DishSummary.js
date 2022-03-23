@@ -10,7 +10,6 @@ function DishSummary(props) {
         <button>Delete</button></div> : null)
   }
 
-
   return (
     <section className="dish-summary">
       <img src={dish.image} alt={dish.name}></img>

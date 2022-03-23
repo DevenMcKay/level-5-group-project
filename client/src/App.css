@@ -12,6 +12,7 @@
 h1, h2 {
   font-family: 'Oswald', sans-serif;
 }
+
 p {
   color: rgb(46, 46, 46);
   font-size: 1.3rem;
@@ -53,7 +54,7 @@ nav div button {
 }
 
 .home a {
-  margin: .4rem;
+  margin: 0rem;
 }
 
 .home img {  
@@ -63,7 +64,9 @@ nav div button {
   height: 100%;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.22) 0px 10px 10px 0px, rgba(0, 0, 0, 0.712) 0px 0px 15px 0px inset;
-  margin: 0 .5rem;}
+  padding: 0;
+  margin: 0;
+}
 
 .home a {
   text-decoration: none;
@@ -91,11 +94,11 @@ nav div button {
   
 }
 
-.search-bar input[type="text"]::placeholder {
+.search-bar input[type="search"]::placeholder {
   color:#b9b9b9;
 }
 
-.search-bar input[type="text"]:focus {
+.search-bar input[type="search"]:focus {
   border-radius: 13px;
   width: 100%;
 }
@@ -111,23 +114,12 @@ nav div button {
   padding: .1rem;
 }
 
-.search-bar input[type="text"] {
+.search-bar input[type="search"] {
   padding: .2rem .5rem;
   width: 70vw;
   font-size: 2rem;
   background: none;
   border: 0 none;
-}
-
-.search-bar input[type="submit"] {
-  background-color:rgb(240, 10, 10);
-  display: inline-block;
-  position: relative;
-  border-radius: 12px;
-  height: 3.1rem;
-  color: white;
-  font-size: 1.5rem;
-  padding: 0 .6rem;
 }
 
 section {
@@ -141,6 +133,7 @@ section {
 section h2 {
   color: rgb(240, 10, 10);
   text-align: center;
+  padding-top: 1.5rem;
 }
 
 .dish-summary {

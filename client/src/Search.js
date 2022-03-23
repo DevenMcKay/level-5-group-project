@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import DishSummary from "./components/dishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
-  const { dishes, isChef, setSelectDish} = props
+  const { dishes, isChef, clickedDish } = props
+  const [searchInput, setSearchInput] = useState("")
+  const [filteredDishes, setFilteredDishes] = useState(dishes)
 
   function welcome() {
     return (isChef ?
@@ -11,21 +13,42 @@ function Search(props) {
       <h1>Welcome Cook!</h1>)
   }
 
-  return (
-    console.log(props),
+  function listDishes() {
+    return (filteredDishes ? <>
+      {filteredDishes.map(dish =>
+        <Link
+          to="/dish"
+          key={dish._id}
+          onClick={() => clickedDish(dish._id)}>
+          <DishSummary dish={dish} isChef={isChef} />
+        </Link>)}
+    </> : null)
+  }
 
+  const filter = (e) => {
+    const keyword = e.target.value
+    if (keyword !== "") {
+      const results = dishes.filter(dish => {
+        return dish.name.toLowerCase().includes(keyword.toLowerCase())
+      })
+      setFilteredDishes(results)
+      console.log('✅', results)
+    } else { setFilteredDishes(dishes) }
+    setSearchInput(keyword)
+  }
+
+  return (
     <div className="search">
       {welcome()}
       <form className="search-bar">
-        <input type="text" placeholder="Type to search..." ></input>
-        <input type="submit" value="Search"></input>
+        <input
+          type="search"
+          placeholder="Search dish title..."
+          value={searchInput}
+          onChange={filter}>
+        </input>
       </form>
-      {dishes ? <>
-        {dishes.map(dish =>
-          <Link to="/dish" key={dish._id} onClick={setSelectDish(dishes._id)}>
-            <DishSummary dish={dish} isChef={isChef}/>
-          </Link>)}
-      </> : null}
+      {listDishes()}
       <button>Add Item</button>
     </div>
   )
