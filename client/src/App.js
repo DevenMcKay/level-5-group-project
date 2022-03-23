@@ -13,7 +13,7 @@ import staticData from "./components/staticData"
 function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
-  const [selectDish, setSelectDish] = useState(dishes[1])
+  const [selectDish, setSelectDish] = useState()
 
   useEffect(() => {
     // axios.get({staticData})
@@ -21,15 +21,42 @@ function App() {
     //   .catch(err => console.log(err))
   }, [])
 
+  function clickedDish(id) {
+    dishes.filter(item => {
+      if (item._id === id) {
+        return (setSelectDish(item))
+      }
+    })
+  }
+
   return (
+    // console.log(selectDish),
     <>
       <Nav />
       <div className='background-image'>
         <Routes>
-          <Route path="/" element={<Home setIsChef={setIsChef} />} />
-          <Route path="/search" element={<Search dishes={dishes} isChef={isChef} setSelectDish={() => console.log("Dishselected")} />} />
-          <Route path="/dish" element={<Dish dish={selectDish} isChef={isChef} />} />
-          <Route path="*" element={(<><Error /><Home /></>)} />
+          <Route
+            path="/"
+            element={
+              <Home
+                setIsChef={setIsChef} />} />
+          <Route
+            path="/search"
+            element={
+              <Search
+                dishes={dishes}
+                isChef={isChef}
+                clickedDish={(id) => clickedDish(id)} />} />
+          <Route
+            path="/dish"
+            element={
+              <Dish
+                dish={selectDish}
+                isChef={isChef} />} />
+          <Route
+            path="*"
+            element={(
+              <><Error /><Home /></>)} />
         </Routes>
       </div>
     </>
