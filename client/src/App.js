@@ -15,6 +15,9 @@ function App() {
   const [selectDish, setSelectDish] = useState();
 
   useEffect(() => {
+    axios.get("/menu")
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
     // axios.get({staticData})
     //   .then(res => setDishes(res.data))
     //   .catch(err => console.log(err))

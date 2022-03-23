@@ -13,12 +13,6 @@ app.use(morgan("dev"));
 // Connect to DB
 mongoose.connect(
   "mongodb://localhost:27017/menudb",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  },
   () => console.log("Connected to the DB")
 );
 

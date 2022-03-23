@@ -174,5 +174,8 @@ a:visited, a:link {
   border-radius: 8px;
 }
 
+@media screen and (max-width: 1000px) {
+  
+}
 
 /* DISH PAGES */
