@@ -13,6 +13,7 @@ import staticData from "./components/staticData"
 function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
   const [selectDish, setSelectDish] = useState()
 
   useEffect(() => {
@@ -30,9 +31,8 @@ function App() {
   }
 
   return (
-    // console.log(selectDish),
     <>
-      <Nav />
+      <Nav isEdit={isEdit} setIsEdit={setIsEdit}/>
       <div className='background-image'>
         <Routes>
           <Route
@@ -46,13 +46,19 @@ function App() {
               <Search
                 dishes={dishes}
                 isChef={isChef}
-                clickedDish={(id) => clickedDish(id)} />} />
+                isEdit={isEdit}
+                setIsEdit={() => setIsEdit(true)}
+                clickedDish={(id) => clickedDish(id)}
+              />} />
           <Route
             path="/dish"
             element={
               <Dish
                 dish={selectDish}
-                isChef={isChef} />} />
+                isChef={isChef}
+                isEdit={isEdit}
+                setIsEdit={() => setIsEdit(!isEdit)}
+              />} />
           <Route
             path="*"
             element={(

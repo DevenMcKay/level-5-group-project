@@ -1,11 +1,11 @@
 import React from "react"
 
 function dishSteps(props) {
-  const { dish, isChef } = props
+  const { dish, isChef, isEdit, handleChange } = props
 
   function deleteButton() {
     return (
-      isChef ? <button>X</button> : null
+      (isChef && isEdit) ? <button>X</button> : null
     )
   }
 
@@ -18,7 +18,12 @@ function dishSteps(props) {
           <div key={item} className="steps-container">
             <div>
               <input type="checkbox" />
-              <textarea type="text" value={item} disabled="disabled" />
+              <textarea
+                name="steps"
+                type="text"
+                value={item}
+                disabled={!isEdit}
+                onChange={(e) => console.log('✅', e)} />
               {deleteButton()}
             </div>
           </div>
