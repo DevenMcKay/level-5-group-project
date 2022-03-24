@@ -1,12 +1,12 @@
- /* ALL PAGES */
+ /********** ALL PAGES **********/
 
 .background-image {
-  background-image: URL("./components/images/background.jpg");
-  background-size: cover;
-  height: 100vh;
   margin-top: -.2rem;
-  border-top:solid 2px rgba(14, 14, 14, 0.685) ;
   box-shadow: rgb(44, 62, 80) 0px 15px 15px -15px inset;
+  border-top:solid 2px rgba(14, 14, 14, 0.685) ;
+  height: 100vh;
+  background-size: cover;
+  background-image: URL("./components/images/background.jpg");
 }
 
 h1, h2 {
@@ -18,7 +18,18 @@ p {
   font-size: 1.3rem;
 }
 
-/* NAVIGATION */
+textarea {
+  font-family: serif;
+  overflow:scroll;
+}
+
+input[type="text"]:disabled, 
+textarea:disabled {
+  color: rgb(59, 59, 59);
+}
+
+
+/********** NAVIGATION **********/
 
 nav {
   display: flex;
@@ -55,6 +66,7 @@ nav div button {
 
 .home a {
   margin: 0rem;
+  text-decoration: none;
 }
 
 .home img {  
@@ -68,12 +80,8 @@ nav div button {
   margin: 0;
 }
 
-.home a {
-  text-decoration: none;
-}
 
-
-/* SEARCH PAGE*/
+/********** SEARCH PAGE**********/
 
 .search {
   padding-top: 3vh;
@@ -86,7 +94,6 @@ nav div button {
   margin: 0;
   text-align: center;
   color:rgb(240, 10, 10);
-  
   text-shadow: 0px 0px 0 white,
   1px 1px 0 white,
   -1px 1px 0 white,
@@ -104,12 +111,10 @@ nav div button {
 }
 
 .search-bar {
+  margin: 3rem 0 4rem;
   border-radius: 15px;
   border: rgb(90, 90, 90) solid 2.9px;
-  display: flex;
-  justify-content: space-between;
   background-color: white;
-  margin: 3rem 0 4rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px 0px, rgba(0, 0, 0, 0.22) 0px 10px 10px 0px;
   padding: .1rem;
 }
@@ -121,6 +126,8 @@ nav div button {
   background: none;
   border: 0 none;
 }
+
+/********* SECTIONS  **********/
 
 section {
   border: solid 3px rgb(219, 219, 219);
@@ -143,10 +150,37 @@ section h2 {
   overflow: hidden;
 }
 
+.dish-summary img {
+  width: 40%;
+  height: 40%;
+}
+
 .dish-summary-text {
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
+}
+
+.dish-summary-text h1,
+.dish-summary-text input[type="text"] {
+  padding-bottom: .5rem;
+  color: rgb(240, 10, 10);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+}
+
+.dish-summary-text textarea {
+  color: rgb(46, 46, 46);
+  font-size: 1.3rem;
+  width: 50vw;
+  overflow: scroll;
+  
+}
+
+.dish-summary-text input[type="text"]:disabled,
+.dish-summary-text textarea:disabled {
+  border: none;
+  resize: none;
 }
 
 a:visited, 
@@ -155,22 +189,7 @@ a:link {
   text-decoration: none;
 }
 
-.dish-summary-text p, 
-.dish-summary-text h1 {
-  margin: 0;
-}
-
-.dish-summary-text h1 {
-  padding-bottom: .5rem;
- color: rgb(240, 10, 10);
-}
-
-.dish-summary img {
-  width: 40%;
-  height: 40%;
-}
-
-.summary-button-container {
+/* .summary-button-container {
  display: flex;
  justify-content: space-around;
  margin: 1rem 0 .5rem;
@@ -181,15 +200,15 @@ a:link {
   color: white;
   font-size: 1.2rem;
   border-radius: 8px;
-}
+} */
 
 
-/* DISH PAGES */
+/********** DISH PAGES **********/
 
 .dish {
+  margin: 0 auto;
   padding-top: 3vh;
   width: 80vw;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
@@ -207,6 +226,7 @@ a:link {
   margin-bottom: 2.5rem;
 }
 
+/********** FLOATING BUTTONS **********/
 .search > button, 
 .dish button {
   display: flex;
@@ -217,12 +237,7 @@ a:link {
   color: white;
   font-size: 1.2rem;
   border-radius: 8px;
-  
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-
-.ingredient-delete {
-  display: inline;
 }
 
 .ingredient-container,
@@ -231,7 +246,6 @@ a:link {
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  
 }
 
 .ingredient-container input[type="text"], 
@@ -240,17 +254,6 @@ a:link {
   line-height: 2rem;
   width: 65vw;
 }
-
-.ingredient-container input[type="text"]:disabled, 
-.steps-container textarea:disabled {
-  color: rgb(59, 59, 59);
-}
-
-.steps-container textarea {
-  font-family: serif;
-  overflow:scroll;
-}
-
 
 .ingredient-container input[type="checkbox"],
 .steps-container input[type="checkbox"] {

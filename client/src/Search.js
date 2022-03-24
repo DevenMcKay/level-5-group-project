@@ -3,7 +3,7 @@ import DishSummary from "./components/dishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
-  const { dishes, isChef, clickedDish } = props
+  const { dishes, isChef, clickedDish, setIsEdit } = props
   const [searchInput, setSearchInput] = useState("")
   const [filteredDishes, setFilteredDishes] = useState(dishes)
 
@@ -20,7 +20,7 @@ function Search(props) {
           to="/dish"
           key={dish._id}
           onClick={() => clickedDish(dish._id)}>
-          <DishSummary dish={dish} isChef={isChef} />
+          <DishSummary dish={dish} />
         </Link>)}
     </> : null)
   }
@@ -32,9 +32,16 @@ function Search(props) {
         return dish.name.toLowerCase().includes(keyword.toLowerCase())
       })
       setFilteredDishes(results)
-      console.log('✅', results)
-    } else { setFilteredDishes(dishes) }
+    } else {
+      setFilteredDishes(dishes)
+    }
     setSearchInput(keyword)
+  }
+
+  function chefButtons() {
+    return (isChef ?
+      <button onClick={() => { return (setIsEdit(), (<Link to="/dish"></Link>)) }}
+      >Add Item</button> : null)
   }
 
   return (
@@ -49,7 +56,7 @@ function Search(props) {
         </input>
       </form>
       {listDishes()}
-      <button>Add Item</button>
+      {chefButtons()}
     </div>
   )
 }

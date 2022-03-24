@@ -1,15 +1,16 @@
 import React from "react"
 
 function dishIngredients(props) {
-  const { dish, isChef } = props
+  const { dish, isChef, isEdit, handleChange } = props
 
   function deleteButton() {
     return (
-      isChef ? <button className="ingredient-delete">X</button> : null
+      (isChef && isEdit) ? <button className="ingredient-delete">X</button> : null
     )
   }
 
   return (
+    console.log('✅', props),
     <section>
       <h2>Ingredients</h2>
       {dish.ingredients.map(item => {
@@ -17,7 +18,12 @@ function dishIngredients(props) {
           <div key={item} className="ingredient-container">
             <div>
               <input type="checkbox" />
-              <input type="text" value={item} disabled="disabled" />
+              <input
+                name="ingredients"
+                type="text"
+                value={item}
+                disabled={!isEdit}
+                onChange={(e) => handleChange(e)} />
               {deleteButton()}
             </div>
           </div>
