@@ -14,7 +14,9 @@ function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [selectDish, setSelectDish] = useState()
+  
+  // DEFAULT DISH ON DISH PAGE
+  const [selectDish, setSelectDish] = useState(dishes[0])
 
   useEffect(() => {
     // axios.get({staticData})

@@ -144,19 +144,25 @@ section h2 {
 }
 
 .dish-summary {
+  width: 100%;
   display: flex;
   justify-content: row;
   align-items: center;
   overflow: hidden;
 }
 
-.dish-summary img {
+.dish-summary-image {
   width: 40%;
   height: 40%;
 }
+.dish-summary-image img {
+  object-fit: contain;
+  width: 100%;
+}
 
 .dish-summary-text {
-  padding: 0 1rem;
+  padding: 0 2rem 0 1rem;
+  width: 60%;
   display: flex;
   flex-direction: column;
 }
@@ -172,7 +178,8 @@ section h2 {
 .dish-summary-text textarea {
   color: rgb(46, 46, 46);
   font-size: 1.3rem;
-  width: 50vw;
+  width: 100%;
+  flex-basis: 70%;
   overflow: scroll;
   
 }
@@ -181,6 +188,7 @@ section h2 {
 .dish-summary-text textarea:disabled {
   border: none;
   resize: none;
+  width: 100%;
 }
 
 a:visited, 
@@ -277,6 +285,11 @@ a:link {
 .steps-container button {
   margin: 0 0 0 1rem ;
 }
+
+.ingredient-add button, 
+.steps-add button {
+  margin: 2rem auto 0;
+ } 
 
 .steps-container button {
   display: flex;

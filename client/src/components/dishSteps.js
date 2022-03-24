@@ -1,19 +1,22 @@
 import React from "react"
 
 function dishSteps(props) {
-  const { dish, isChef, isEdit, handleChange } = props
+  const { dish, isChef, isEdit, deleteItem, handleChange } = props
 
-  function deleteButton() {
+  function deleteButton(index) {
     return (
-      (isChef && isEdit) ? <button>X</button> : null
-    )
+      (isChef && isEdit) ? <button name="steps" id={index} onClick={(e)=> deleteItem(e)}>X</button> : null)
+  }
+  function addButton() {
+    return (
+      (isChef && isEdit) ? <button>Add Step</button> : null)
   }
 
   return (
     // console.log(dish),
     <section>
       <h2>Steps</h2>
-      {dish.steps.map(item => {
+      {dish.steps.map((item, index) => { 
         return (
           <div key={item} className="steps-container">
             <div>
@@ -21,14 +24,18 @@ function dishSteps(props) {
               <textarea
                 name="steps"
                 type="text"
+                index={index}
                 value={item}
                 disabled={!isEdit}
                 onChange={(e) => console.log('✅', e)} />
-              {deleteButton()}
+              {deleteButton(index)}
             </div>
           </div>
         )
       })}
+      <div className="steps-add">
+        {addButton()}
+      </div>
     </section>
   )
 }

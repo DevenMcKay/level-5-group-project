@@ -12,10 +12,10 @@ function DishSummary(props) {
   function imageUrlInput() {
     return (isChef && isEdit ?
       <textarea
-        name="ImgInput"
+        name="image"
         placeholder="Image URL"
         value={dish.image}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e)}
         disabled={false}
         className="summary-img-url"
       ></textarea> : null)
@@ -23,9 +23,10 @@ function DishSummary(props) {
 
 
   return (
-
     <section className="dish-summary">
-      <img src={dish.image} alt={dish.name}></img>
+      <div className="dish-summary-image">
+        <img src={dish.image} alt={dish.name}></img>
+      </div>
       <div className="dish-summary-text">
         {imageUrlInput()}
         <input
@@ -46,13 +47,7 @@ function DishSummary(props) {
           onChange={(e) => handleChange(e)}
           className="summary-p"
         ></textarea>
-        {/* <p>{dish.summary}</p> */}
       </div>
-
-
-
-
-
     </section>
   )
 }
