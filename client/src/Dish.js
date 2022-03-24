@@ -6,7 +6,7 @@ import DishSteps from "./components/dishSteps"
 
 function Dish(props) {
   const { dish, isChef, isEdit, setIsEdit } = props
-  const { updatedDish, setUpdatedDish } = useState(dish)
+  const [updatedDish, setUpdatedDish] = useState(dish)
 
   function chefEditButtons() {
     const buttonText = () => {
@@ -18,27 +18,72 @@ function Dish(props) {
 
   function handleChange(e) {
     const { name, value } = e.target
-    console.log("name:", [name], "value:", value)
-    // setUpdatedDish(prevInput => ({ ...prevInput, [name]: value }))
+    setUpdatedDish(prevInput => ({ ...prevInput, [name]: value }))
   }
 
+
+  // const ingredientChange = (e) => {
+  //   const { name, value, id } = e.target
+  //   const newItems = updatedDish.ingredients.map((item, index) => {
+  //     // console.log(value)
+  //     if (id === index) {
+  //       // console.log('✅', value)
+  //       return item = value
+  //     }
+  //     return item
+  //   })
+  //   console.log('✅', newItems)
+  //   // setUpdatedDish(prevInput => ({ ...prevInput, newItems}))
+  // }
+
+
+  // function ingredientChange(e) {
+  //   const { name, value, id } = e.target
+  //   const dishIng = dish.ingredients[id]
+  // console.log('✅', name, value, id)
+  // const newIng = dishIng[0][id] = value
+  //  const newItems = updatedDish.ingredients.map((item, index) => {
+  //   if (id === index) {
+  //       // console.log('✅', value)
+  //       return item = value
+  //     }
+  //     return item
+  //   })
+  // console.log('✅', `${dishIng}${value}`)
+  // setUpdatedDish(prevInput => ({ ...prevInput, ingredients:  [...prevInput.ingredients, newIng]}))
+  //  }
+
+  function deleteItem(e) {
+    const { id, name } = e.target
+    const newArray = updatedDish[`${name}`].filter((item, index) => {
+      if (id != index) {
+        return item
+      }
+    })
+    setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
+  }
+
+
   return (
+    // console.log('✅', updatedDish),
     <div className="dish">
       {chefEditButtons()}
       <DishSummary
-        dish={dish}
+        dish={updatedDish}
         isChef={isChef}
         isEdit={isEdit}
         handleChange={(e) => handleChange(e)} />
       <DishIngredients
-        dish={dish}
+        dish={updatedDish}
         isChef={isChef}
         isEdit={isEdit}
-        handleChange={(e, index) => handleChange(e, index)} />
+        deleteItem={(e) => deleteItem(e)}
+        handleChange={(e) => console.log(e)} />
       <DishSteps
-        dish={dish}
+        dish={updatedDish}
         isChef={isChef}
         isEdit={isEdit}
+        deleteItem={(e) => deleteItem(e)}
         handleChange={(e, index) => handleChange(e, index)} />
       {chefEditButtons()}
     </div>
