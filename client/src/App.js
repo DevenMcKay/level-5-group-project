@@ -15,7 +15,7 @@ function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  
+
   // DEFAULT DISH ON DISH PAGE
   const [selectDish, setSelectDish] = useState(dishes[0])
 
@@ -33,9 +33,18 @@ function App() {
     })
   }
 
+  function deleteDish(_id) {
+    const newArr = dishes.filter(dish => {
+      if (_id !== dish._id) {
+        return dish
+      }
+    })
+    setDishes(newArr)
+  }
+
   return (
     <>
-      <Nav isEdit={isEdit} setIsEdit={setIsEdit}/>
+      <Nav isEdit={isEdit} setIsEdit={setIsEdit} />
       <div className='background-image'>
         <Routes>
           <Route
@@ -57,12 +66,13 @@ function App() {
             path="/dish"
             element={
               <Dish
+                deleteDish={(_id) => deleteDish(_id)}
                 dish={selectDish}
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(!isEdit)}
               />} />
-              <Route
+          <Route
             path="/dishform"
             element={
               <Dish

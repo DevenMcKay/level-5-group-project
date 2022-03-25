@@ -5,23 +5,16 @@ import DishIngredients from "./components/dishIngredients"
 import DishSteps from "./components/dishSteps"
 
 function Dish(props) {
-  const { dish, isChef, isEdit, setIsEdit } = props
+  const { dish, isChef, isEdit, setIsEdit, deleteDish} = props
   const [updatedDish, setUpdatedDish] = useState(dish)
-
-
-  function chefEditButtons() {
-    const buttonText = () => {
-      return isEdit ? "Save" : "Edit"
-    }
-    return (isChef ?
-      <button onClick={() => setIsEdit()}>{buttonText()}</button> : null)
-  }
+  const {_id} = updatedDish
 
   function handleChange(e) {
     const { name, value } = e.target
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: value }))
   }
 
+  // USED FOR TEXT & TEXTAREA INPUTS 
   const textChange = (e) => {
     const { id, name, value } = e.target
     const newArray = updatedDish[`${name}`].map((item, index) => {
@@ -53,8 +46,27 @@ function Dish(props) {
     }
   }
 
+  function chefEditButtons() {
+    const buttonText = () => {
+      return isEdit ? "Save" : "Edit"
+    }
+    if (isChef && isEdit) {
+      return (
+        <div className="dish-button-container">
+          <div>
+            <button onClick={() => deleteDish(_id)}>DELETE</button>
+          </div>
+          <button onClick={() => setIsEdit()}>{buttonText()}</button>
+        </div>)
+    } else if (isChef) {
+      return (<button onClick={() => setIsEdit()}>{buttonText()}</button>)
+    } else {
+      return null
+    }
+  }
+
   return (
-    console.log('✅', updatedDish),
+    console.log('✅', props),
     <div className="dish">
       {chefEditButtons()}
       <DishSummary
