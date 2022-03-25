@@ -1,7 +1,7 @@
 import React from "react"
 
 function dishSteps(props) {
-  const { dish, isChef, isEdit, deleteItem, addItem, handleChange } = props
+  const { dish, isChef, isEdit, deleteItem, addItem, handleChange, textChange } = props
 
   function deleteButton(index) {
     return (
@@ -13,8 +13,15 @@ function dishSteps(props) {
       (isChef && isEdit) ? <button name="steps" onClick={(e) => addItem(e)}>Add Step</button> : null)
   }
 
+  // KEEPS CARET AT END OF TEXT IN TEXTAREA WHEN TYPING
+  function moveCaretAtEnd(e) {
+    var temp_value = e.target.value
+    e.target.value = ''
+    e.target.value = temp_value
+  }
+
+
   return (
-    // console.log(dish),
     <section>
       <h2>Steps</h2>
       {dish.steps.map((item, index) => {
@@ -24,12 +31,16 @@ function dishSteps(props) {
               <h3>{`${index+1}.`}</h3>
               <input type="checkbox" />
               <textarea
+                // FORCES CARET TO REMAIN IN PLACE FOR TYPING EACH LETTER AFTER RENDER
+                autoFocus
+                onFocus={moveCaretAtEnd}
+                id={index}
                 name="steps"
                 type="text"
                 index={index}
                 value={item}
                 disabled={!isEdit}
-                onChange={(e) => console.log('✅', e)} />
+                onChange={(e) => textChange(e)} />
               {deleteButton(index)}
             </div>
           </div>

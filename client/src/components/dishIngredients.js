@@ -1,7 +1,7 @@
 import React from "react"
 
 function dishIngredients(props) {
-  const { dish, isChef, isEdit, handleChange, deleteItem, addItem } = props
+  const { dish, isChef, isEdit, handleChange, deleteItem, addItem, textChange } = props
 
   function deleteButton(index) {
     return (
@@ -21,13 +21,14 @@ function dishIngredients(props) {
             <div>
               <input type="checkbox" />
               <input
-                name={`ingredients${index}`}
+                autoFocus
+                name={`ingredients`}
                 id={index}
                 index={index}
                 type="text"
                 value={item}
                 disabled={!isEdit}
-                onChange={(e) => handleChange(e)} />
+                onChange={(e) => textChange(e)} />
               {deleteButton(index)}
             </div>
           </div>
