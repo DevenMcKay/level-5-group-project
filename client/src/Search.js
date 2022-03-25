@@ -42,7 +42,7 @@ function Search(props) {
     return (isChef ?
       <Link to="/dishform">
         <button onClick={() =>setIsEdit(true)}
-        >Add Item</button>
+        >ADD DISH</button>
       </Link>
       : null)
   }

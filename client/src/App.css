@@ -249,6 +249,19 @@ a:link {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+.dish-button-container {
+  display: flex;
+}
+
+.dish-button-container  {
+ padding-right: 6rem;
+}
+
+.dish-button-container div > button:nth-of-type(1) {
+background-color:rgb(255, 115, 0);
+width: 6rem;
+}
+
 .ingredient-container,
 .steps-container {
   display: flex;
