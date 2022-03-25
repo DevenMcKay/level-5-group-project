@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import DishSummary from "./components/dishSummary"
 import DishIngredients from "./components/dishIngredients"
@@ -7,6 +7,7 @@ import DishSteps from "./components/dishSteps"
 function Dish(props) {
   const { dish, isChef, isEdit, setIsEdit } = props
   const [updatedDish, setUpdatedDish] = useState(dish)
+
 
   function chefEditButtons() {
     const buttonText = () => {
@@ -31,9 +32,7 @@ function Dish(props) {
     })
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
   }
-  
 
-  
   function deleteItem(e) {
     const { id, name } = e.target
     const newArray = updatedDish[`${name}`].filter((item, index) => {
@@ -44,14 +43,18 @@ function Dish(props) {
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
   }
 
-  function addItem(e) { 
+  function addItem(e) {
     const { id, name } = e.target
-    setUpdatedDish(prevInput => ({ ...prevInput, [name]: [...prevInput[name],[""]] }))
+    // console.log(updatedDish)
+    if (updatedDish[name] === undefined) {
+      return setUpdatedDish(prevInput => ({ ...prevInput, [name]: [""] }))
+    } else {
+      setUpdatedDish(prevInput => ({ ...prevInput, [name]: [...prevInput[name], [""]] }))
+    }
   }
 
-  
-
   return (
+    console.log('✅', updatedDish),
     <div className="dish">
       {chefEditButtons()}
       <DishSummary
@@ -64,14 +67,14 @@ function Dish(props) {
         isChef={isChef}
         isEdit={isEdit}
         deleteItem={(e) => deleteItem(e)}
-        addItem={(e)=>addItem(e)}
+        addItem={(e) => addItem(e)}
         textChange={(e) => textChange(e)} />
       <DishSteps
         dish={updatedDish}
         isChef={isChef}
         isEdit={isEdit}
         deleteItem={(e) => deleteItem(e)}
-        addItem={(e)=>addItem(e)}
+        addItem={(e) => addItem(e)}
         textChange={(e) => textChange(e)} />
       {chefEditButtons()}
     </div>

@@ -1,7 +1,7 @@
 import React from "react"
 
 function dishIngredients(props) {
-  const { dish, isChef, isEdit, handleChange, deleteItem, addItem, textChange } = props
+  const { dish, isChef, isEdit, deleteItem, addItem, textChange } = props
 
   function deleteButton(index) {
     return (
@@ -15,7 +15,7 @@ function dishIngredients(props) {
   return (
     <section>
       <h2>Ingredients</h2>
-      {dish.ingredients.map((item, index) => {
+      { dish.ingredients ? dish.ingredients.map((item, index) => {
         return (
           <div key={`${item}${index}`} className="ingredient-container"  >
             <div>
@@ -33,7 +33,7 @@ function dishIngredients(props) {
             </div>
           </div>
         )
-      })}
+      }) : null}
       <div className="ingredient-add">
         {addButton()}
       </div>

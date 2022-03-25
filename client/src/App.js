@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom"
 import Error from "./components/Error"
 import axios from "axios"
 import staticData from "./components/staticData"
+import blankDish from "./components/dishBlank"
 
 
 function App() {
@@ -57,6 +58,15 @@ function App() {
             element={
               <Dish
                 dish={selectDish}
+                isChef={isChef}
+                isEdit={isEdit}
+                setIsEdit={() => setIsEdit(!isEdit)}
+              />} />
+              <Route
+            path="/dishform"
+            element={
+              <Dish
+                dish={blankDish}
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(!isEdit)}
