@@ -9,7 +9,7 @@
   background-image: URL("./components/images/background.jpg");
 }
 
-h1, h2 {
+h1, h2, h3 {
   font-family: 'Oswald', sans-serif;
 }
 
@@ -298,4 +298,10 @@ a:link {
   top: 15%;
   height: 3rem;
   text-align: center;
+}
+
+.steps-container h3 {
+  align-self: center;
+  margin-right: 1rem;
+  color: rgb(226, 7, 7);
 }

@@ -63,6 +63,10 @@ function Dish(props) {
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
   }
 
+  function addItem(e) { 
+    const { id, name } = e.target
+    setUpdatedDish(prevInput => ({ ...prevInput, [name]: [...prevInput[name],[""]] }))
+  }
 
   return (
     // console.log('✅', updatedDish),
@@ -78,12 +82,14 @@ function Dish(props) {
         isChef={isChef}
         isEdit={isEdit}
         deleteItem={(e) => deleteItem(e)}
+        addItem={(e)=>addItem(e)}
         handleChange={(e) => console.log(e)} />
       <DishSteps
         dish={updatedDish}
         isChef={isChef}
         isEdit={isEdit}
         deleteItem={(e) => deleteItem(e)}
+        addItem={(e)=>addItem(e)}
         handleChange={(e, index) => handleChange(e, index)} />
       {chefEditButtons()}
     </div>

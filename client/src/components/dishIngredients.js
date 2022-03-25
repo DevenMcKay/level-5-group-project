@@ -9,7 +9,7 @@ function dishIngredients(props) {
   }
   function addButton() {
     return (
-      (isChef && isEdit) ? <button className="ingredient-add" >Add Ingredient</button> : null)
+      (isChef && isEdit) ? <button name="ingredients" className="ingredient-add" onClick={(e)=>addItem(e)}>Add Ingredient</button> : null)
   }
 
   return (
