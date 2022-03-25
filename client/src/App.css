@@ -236,6 +236,7 @@ a:link {
 
 /********** FLOATING BUTTONS **********/
 .search > button, 
+.search > a > button,
 .dish button {
   display: flex;
   max-width: fit-content;

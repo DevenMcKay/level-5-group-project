@@ -40,8 +40,11 @@ function Search(props) {
 
   function chefButtons() {
     return (isChef ?
-      <button onClick={() => { return (setIsEdit(), (<Link to="/dish"></Link>)) }}
-      >Add Item</button> : null)
+      <Link to="/dishform">
+        <button onClick={() =>setIsEdit(true)}
+        >Add Item</button>
+      </Link>
+      : null)
   }
 
   return (

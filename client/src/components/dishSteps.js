@@ -24,7 +24,8 @@ function dishSteps(props) {
   return (
     <section>
       <h2>Steps</h2>
-      {dish.steps.map((item, index) => {
+      {dish.steps?
+       dish.steps.map((item, index) => {
         return (
           <div key={`${item}${index}`} className="steps-container">
             <div>
@@ -45,7 +46,7 @@ function dishSteps(props) {
             </div>
           </div>
         )
-      })}
+      }): null }
       <div className="steps-add">
         {addButton()}
       </div>
