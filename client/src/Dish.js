@@ -3,11 +3,13 @@ import { Link } from "react-router-dom"
 import DishSummary from "./components/dishSummary"
 import DishIngredients from "./components/dishIngredients"
 import DishSteps from "./components/dishSteps"
+const { v4: uuidv4 } = require('uuid')
 
 function Dish(props) {
-  const { dish, isChef, isEdit, setIsEdit, deleteDish} = props
+  const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish } = props
   const [updatedDish, setUpdatedDish] = useState(dish)
-  const {_id} = updatedDish
+  const { _id } = updatedDish
+
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -48,15 +50,27 @@ function Dish(props) {
 
   function chefEditButtons() {
     const buttonText = () => {
-      return isEdit ? "Save" : "Edit"
+      return isEdit ? "Save" : "Edit"     //CHANGES EDIT BUTTON TEXT
     }
-    if (isChef && isEdit) {
+    if (isChef && isEdit && isBlankDish === true) {
+      return (
+        <button onClick={() => {
+          return (setIsEdit(),
+            setIsBlankDish(),
+            delete updatedDish[0],       // DELETES BLANK DISH
+            updatedDish._id = uuidv4(),  // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
+            addDish(updatedDish)
+          )
+        }}>{buttonText()}</button>)
+    } else if (isChef && isEdit) {
       return (
         <div className="dish-button-container">
           <div>
             <button onClick={() => deleteDish(_id)}>DELETE</button>
           </div>
-          <button onClick={() => setIsEdit()}>{buttonText()}</button>
+          <button onClick={() => {
+            return (setIsEdit(), updateDish(_id, updatedDish))
+          }}>{buttonText()}</button>
         </div>)
     } else if (isChef) {
       return (<button onClick={() => setIsEdit()}>{buttonText()}</button>)
@@ -66,7 +80,7 @@ function Dish(props) {
   }
 
   return (
-    console.log('✅', props),
+
     <div className="dish">
       {chefEditButtons()}
       <DishSummary
