@@ -15,6 +15,7 @@ function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
+  const [isBlankDish, setIsBlankDish] = useState(false)
 
   // DEFAULT DISH ON DISH PAGE
   const [selectDish, setSelectDish] = useState(dishes[0])
@@ -42,6 +43,20 @@ function App() {
     setDishes(newArr)
   }
 
+  function addDish(updatedDish) {
+    setDishes(prevInput => [...prevInput, updatedDish])
+  }
+
+  function updateDish(id, updatedDish) {
+    const newArr = dishes.map(dish => {
+      if (dish._id === id) {
+        return updatedDish
+      }
+      return dish
+    })
+    setDishes(newArr)
+  }
+
   return (
     <>
       <Nav isEdit={isEdit} setIsEdit={setIsEdit} />
@@ -61,21 +76,27 @@ function App() {
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(true)}
                 clickedDish={(id) => clickedDish(id)}
+                setIsBlankDish={() => setIsBlankDish(true)}
               />} />
           <Route
             path="/dish"
             element={
               <Dish
+                setIsBlankDish={() => setIsBlankDish(false)}
                 deleteDish={(_id) => deleteDish(_id)}
                 dish={selectDish}
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(!isEdit)}
+                updateDish={(id, updatedDish) => updateDish(id, updatedDish)}
               />} />
           <Route
             path="/dishform"
             element={
               <Dish
+                isBlankDish={isBlankDish}
+                setIsBlankDish={() => setIsBlankDish(false)}
+                addDish={(updatedDish) => addDish(updatedDish)}
                 dish={blankDish}
                 isChef={isChef}
                 isEdit={isEdit}
