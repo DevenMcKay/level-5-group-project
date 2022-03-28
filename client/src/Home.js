@@ -5,7 +5,6 @@ import CookLogo from "./components/images/cook.png"
 
 function Home(props) {
 
-
   return (
     <div className="home">
       <Link

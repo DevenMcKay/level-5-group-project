@@ -6,10 +6,9 @@ import DishSteps from "./components/dishSteps"
 const { v4: uuidv4 } = require('uuid')
 
 function Dish(props) {
-  const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish } = props
+  const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish, setDishMessage} = props
   const [updatedDish, setUpdatedDish] = useState(dish)
   const { _id } = updatedDish
-
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -28,6 +27,7 @@ function Dish(props) {
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
   }
 
+  // DELETE STEP & INGREDIENT BUTTONS
   function deleteItem(e) {
     const { id, name } = e.target
     const newArray = updatedDish[`${name}`].filter((item, index) => {
@@ -38,9 +38,9 @@ function Dish(props) {
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: newArray }))
   }
 
+  // ADD STEP & INGREDIENT BUTTONS
   function addItem(e) {
-    const { id, name } = e.target
-    // console.log(updatedDish)
+    const { name } = e.target
     if (updatedDish[name] === undefined) {
       return setUpdatedDish(prevInput => ({ ...prevInput, [name]: [""] }))
     } else {
@@ -48,39 +48,49 @@ function Dish(props) {
     }
   }
 
+  // BUTTONS AT TOP & BOTTOM OF DISH EDIT PAGES
   function chefEditButtons() {
     const buttonText = () => {
       return isEdit ? "Save" : "Edit"     //CHANGES EDIT BUTTON TEXT
     }
+    // NEW DISH BUTTONS
     if (isChef && isEdit && isBlankDish === true) {
       return (
-        <button onClick={() => {
-          return (setIsEdit(),
-            setIsBlankDish(),
-            delete updatedDish[0],       // DELETES BLANK DISH
-            updatedDish._id = uuidv4(),  // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
-            addDish(updatedDish)
-          )
-        }}>{buttonText()}</button>)
+        <Link to="/search">
+          <button onClick={() => {
+            return (
+              setIsEdit(),
+              setIsBlankDish(),
+              delete updatedDish[0],       // DELETES BLANK DISH
+              updatedDish._id = uuidv4(),
+              setDishMessage("add"),  // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
+              addDish(updatedDish))
+          }}>{buttonText()}</button>
+        </Link>)
+    // EDIT DISH "SAVE" BUTTON
     } else if (isChef && isEdit) {
       return (
-        <div className="dish-button-container">
-          <div>
-            <button onClick={() => deleteDish(_id)}>DELETE</button>
+        <Link to="/search">
+          <div className="dish-button-container">
+            <div>
+              <button onClick={() =>{ return (deleteDish(_id),setDishMessage("delete"))}}>DELETE</button>
+            </div>
+            <button onClick={() => {
+              return (setIsEdit(), updateDish(_id, updatedDish), setDishMessage("edit"))
+            }}>{buttonText()}</button>
           </div>
-          <button onClick={() => {
-            return (setIsEdit(), updateDish(_id, updatedDish))
-          }}>{buttonText()}</button>
-        </div>)
+        </Link>)
+    // EDIT DISH "EDIT" BUTTON
     } else if (isChef) {
-      return (<button onClick={() => setIsEdit()}>{buttonText()}</button>)
+      return (
+        <button onClick={() => setIsEdit()}>{buttonText()}</button>)
     } else {
+    // COOK PAGES
       return null
     }
   }
 
   return (
-
     <div className="dish">
       {chefEditButtons()}
       <DishSummary
