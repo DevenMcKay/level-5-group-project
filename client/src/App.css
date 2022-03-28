@@ -1,63 +1,3 @@
- /********** ALL PAGES **********/
-
-.background-image {
-  margin-top: -.2rem;
-  box-shadow: rgb(44, 62, 80) 0px 15px 15px -15px inset;
-  border-top:solid 2px rgba(14, 14, 14, 0.685) ;
-  height: 100vh;
-  background-size: cover;
-  background-image: URL("./components/images/background.jpg");
-}
-
-h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
-}
-
-p {
-  color: rgb(46, 46, 46);
-  font-size: 1.3rem;
-}
-
-textarea {
-  font-family: serif;
-  resize: vertical;
-  
-}
-
-input[type="text"]:disabled, 
-textarea:disabled {
-  color: rgb(59, 59, 59);
-}
-
-
-/********** NAVIGATION **********/
-
-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-between;
-}
-
-nav > div {
- margin-top: 2.5rem;
-}
-
-nav div button {
-  color: white;
-  background-color: rgb(240, 10, 10);
-  border-radius: 5px;
-  width: 5rem;
-  height: 1.5rem;
-  margin: 0 1rem .3rem;
-  font-weight: 600;
-}
-
-.header {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .home {
   padding-top: 13vh;
   display: flex;
@@ -128,16 +68,6 @@ nav div button {
   0px 5px 6px rgba(0, 0, 0, 0.53);
 }
 
-
-.search-bar input[type="search"]::placeholder {
-  color:#b9b9b9;
-}
-
-.search-bar input[type="search"]:focus {
-  border-radius: 13px;
-  width: 100%;
-}
-
 .search-bar {
   margin: 3rem 0 4rem;
   border-radius: 15px;
@@ -155,7 +85,16 @@ nav div button {
   border: 0 none;
 }
 
-/********* SECTIONS  **********/
+.search-bar input[type="search"]::placeholder {
+  color:#b9b9b9;
+}
+
+.search-bar input[type="search"]:focus {
+  border-radius: 13px;
+  width: 100%;
+}
+
+/**** SECTIONS (All Summary, Steps, Ingred Boxes)  ****/
 
 section {
   border: solid 3px rgb(219, 219, 219);
@@ -170,6 +109,8 @@ section h2 {
   text-align: center;
   padding-top: 1.5rem;
 }
+
+/**** Dish Summary ****/
 
 .dish-summary {
   width: 100%;
@@ -250,8 +191,7 @@ a:link {
   margin-bottom: 2.5rem;
 }
 
-/********** FLOATING BUTTONS **********/
-.search > button, 
+/* ALL FLOATING BUTTONS on search & dish pages*/
 .search > a > button,
 .dish button {
   display: flex;
@@ -265,19 +205,19 @@ a:link {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
+/* Spaces Dish Delete & Save/Edit Buttons */
 .dish-button-container {
   display: flex;
+  padding-right: 6rem;
 }
 
-.dish-button-container  {
- padding-right: 6rem;
-}
-
+/* Delete Dish Button */
 .dish-button-container div > button:nth-of-type(1) {
-background-color:rgb(255, 115, 0);
-width: 6rem;
+  background-color:rgb(255, 115, 0);
+  width: 6rem;
 }
 
+/* Centers steps&ingred elements */
 .ingredient-container,
 .steps-container {
   display: flex;
@@ -305,14 +245,15 @@ width: 6rem;
   top: 45%;
 }
 
+/* aligns step&ingred input checks, text, & deletes */
 .ingredient-container > div,
 .steps-container > div {
   display: flex;
   flex-direction: row;
 }
 
-.ingredient-container button,
-.steps-container button {
+/* Delete Ingredient Buttons */
+.ingredient-container button {
   margin: 0 0 0 1rem ;
 }
 
@@ -321,17 +262,19 @@ width: 6rem;
   margin: 2rem auto 0;
  } 
 
-.steps-container button {
+ .steps-number {
+   align-self: center;
+   margin-right: 1rem;
+   color: rgb(226, 7, 7);
+ }
+
+/* Delete Step Buttons */
+.steps-container button { 
+  margin: 0 0 0 1rem ;
   display: flex;
   align-items: center;
   position: relative;
   top: 15%;
   height: 3rem;
   text-align: center;
-}
-
-.steps-container h3 {
-  align-self: center;
-  margin-right: 1rem;
-  color: rgb(226, 7, 7);
 }

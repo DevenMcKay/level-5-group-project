@@ -10,17 +10,17 @@ import Nav from "./components/Nav"
 import staticData from "./components/staticData"
 import blankDish from "./components/dishBlank"
 
-
 function App() {
   const [dishes, setDishes] = useState(staticData)
   const [isBlankDish, setIsBlankDish] = useState(false)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [dishMessage, setDishMessage] = useState(null)
+  const [actionMessage, setActionMessage] = useState(null)
 
   // DEFAULT DISH ON DISH PAGE
   const [selectDish, setSelectDish] = useState(dishes[0])
 
+  // GET ALL AXIOS BACKEND
   useEffect(() => {
     // axios.get({staticData})
     //   .then(res => setDishes(res.data))
@@ -36,6 +36,7 @@ function App() {
     })
   }
 
+  // DELETE DISH
   function deleteDish(_id) {
     const newArr = dishes.filter(dish => {
       if (_id !== dish._id) {
@@ -45,10 +46,12 @@ function App() {
     setDishes(newArr)
   }
 
+  // ADD DISH
   function addDish(updatedDish) {
     setDishes(prevInput => [...prevInput, updatedDish])
   }
 
+  // UPDATE DISH
   function updateDish(id, updatedDish) {
     const newArr = dishes.map(dish => {
       if (dish._id === id) {
@@ -61,7 +64,7 @@ function App() {
 
   return (
     <>
-      <Nav isEdit={isEdit} setIsEdit={setIsEdit} />
+      <Nav isEdit={isEdit} setIsEdit={setIsEdit} setActionMessage={() => setActionMessage(null)} />
       <div className='background-image'>
         <Routes>
           <Route
@@ -77,41 +80,44 @@ function App() {
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(true)}
-                clickedDish={(id) => {return (clickedDish(id), setDishMessage(null))}}
                 setIsBlankDish={() => setIsBlankDish(true)}
-                dishMessage={dishMessage}
-                setDishMessage={setDishMessage}
+                clickedDish={(id) => { return (clickedDish(id), setActionMessage(null)) }}
+                actionMessage={actionMessage}
+                setActionMessage={setActionMessage}
               />} />
           <Route
             path="/dish"
             element={
               <Dish
-                setIsBlankDish={() => setIsBlankDish(false)}
-                deleteDish={(_id) => deleteDish(_id)}
                 dish={selectDish}
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(!isEdit)}
+                setIsBlankDish={() => setIsBlankDish(false)}
+                deleteDish={(_id) => deleteDish(_id)}
                 updateDish={(id, updatedDish) => updateDish(id, updatedDish)}
-                setDishMessage={setDishMessage}
+                setActionMessage={setActionMessage}
               />} />
           <Route
             path="/dishform"
             element={
               <Dish
-              isBlankDish={isBlankDish}
-              setIsBlankDish={() => setIsBlankDish(false)}
-              addDish={(updatedDish) => addDish(updatedDish)}
-              dish={blankDish}
-              isChef={isChef}
-              isEdit={isEdit}
-              setIsEdit={() => setIsEdit(!isEdit)}
-              setDishMessage={setDishMessage}
+                dish={blankDish}
+                isChef={isChef}
+                isEdit={isEdit}
+                isBlankDish={isBlankDish}
+                setIsBlankDish={() => setIsBlankDish(false)}
+                addDish={(updatedDish) => addDish(updatedDish)}
+                setIsEdit={() => setIsEdit(!isEdit)}
+                setActionMessage={setActionMessage}
               />} />
           <Route
             path="*"
             element={(
-              <><Error /><Home /></>)} />
+              <>
+                <Error />
+                <Home setIsChef={setIsChef} />
+              </>)} />
         </Routes>
       </div>
     </>

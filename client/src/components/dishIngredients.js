@@ -3,25 +3,25 @@ import React from "react"
 function dishIngredients(props) {
   const { dish, isChef, isEdit, deleteItem, addItem, textChange } = props
 
-  function deleteButton(index) {
+  function deleteIngredientButton(index) {
     return (
       (isChef && isEdit) ? <button name="ingredients" id={index} onClick={(e) => deleteItem(e)}>X</button> : null)
   }
-  function addButton() {
+  function addIngredientButton() {
     return (
-      (isChef && isEdit) ? <button name="ingredients" className="ingredient-add" onClick={(e)=>addItem(e)}>Add Ingredient</button> : null)
+      (isChef && isEdit) ? <button name="ingredients" className="ingredient-add" onClick={(e) => addItem(e)}>Add Ingredient</button> : null)
   }
 
   return (
     <section>
       <h2>Ingredients</h2>
-      { dish.ingredients ? dish.ingredients.map((item, index) => {
+      {dish.ingredients ? dish.ingredients.map((item, index) => {
         return (
           <div key={`${item}${index}`} className="ingredient-container"  >
             <div>
               <input type="checkbox" />
               <input
-                autoFocus
+                autoFocus               // FORCES CARET TO REMAIN AFTER RENDER
                 name={`ingredients`}
                 id={index}
                 index={index}
@@ -29,13 +29,13 @@ function dishIngredients(props) {
                 value={item}
                 disabled={!isEdit}
                 onChange={(e) => textChange(e)} />
-              {deleteButton(index)}
+              {deleteIngredientButton(index)}
             </div>
           </div>
         )
       }) : null}
       <div className="ingredient-add">
-        {addButton()}
+        {addIngredientButton()}
       </div>
     </section>
   )
