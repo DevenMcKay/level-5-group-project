@@ -3,23 +3,23 @@ import DishSummary from "./components/dishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
-  const { dishes, isChef, clickedDish, setIsEdit, setIsBlankDish, dishMessage, setDishMessage } = props
+  const { dishes, isChef, clickedDish, setIsEdit, setIsBlankDish, actionMessage, setActionMessage } = props
   const [searchInput, setSearchInput] = useState("")
   const [filteredDishes, setFilteredDishes] = useState(dishes)
 
 
-  function welcome() {
+  function welcomeMessage() {
     return (isChef ?
       <h1>Welcome Chef!</h1> :
       <h1>Welcome Cook!</h1>)
   }
 
-  function displayMessage() {
-    if (dishMessage === "add") {
+  function displayActionMessage() {
+    if (actionMessage === "add") {
       return (<h2>Dish Added!</h2>)
-    } else if (dishMessage === "delete") {
+    } else if (actionMessage === "delete") {
       return (<h2>Dish Deleted!</h2>)
-    } else if (dishMessage === "edit") {
+    } else if (actionMessage === "edit") {
       return (<h2>Dish Edited!</h2>)
     } else {
       return null
@@ -32,7 +32,7 @@ function Search(props) {
         <Link
           to="/dish"
           key={dish._id}
-          onClick={() => { return (clickedDish(dish._id), setDishMessage(null)) }}>
+          onClick={() => { return (clickedDish(dish._id), setActionMessage(null)) }}>
           <DishSummary dish={dish} />
         </Link>)}
     </> : null)
@@ -52,13 +52,15 @@ function Search(props) {
     setSearchInput(keyword)
   }
 
-  // ADD BUTTON TO BLANK FORM
-  function chefButtons(dishes) {
+  // ADD BUTTON LEADS TO BLANK FORM
+  function chefAddButton() {
     return (isChef ?
       <Link to="/dishform">
         <button onClick={() => {
           return (
-            setIsEdit(true), setIsBlankDish(), setDishMessage(null))
+            setIsEdit(true),      // INPUT ENABLE ON NEW DISH PAGE
+            setIsBlankDish(),     // REMOVES DELETE BUTTON ON NEW DISH PAGE
+            setActionMessage(null)) // RESETS ACTION MESSAGE 
         }}
         >ADD DISH</button>
       </Link>
@@ -66,20 +68,19 @@ function Search(props) {
   }
 
   return (
-    console.log(dishMessage),
     <div className="search">
-      {welcome()}
-      {displayMessage()}
+      {welcomeMessage()}
+      {displayActionMessage()}
       <form className="search-bar">
         <input
           type="search"
           placeholder="Search dish title..."
           value={searchInput}
-          onChange={filter}>
+          onChange={(e)=>filter(e)}>
         </input>
       </form>
       {listDishes()}
-      {chefButtons(dishes)}
+      {chefAddButton()}
     </div>
   )
 }

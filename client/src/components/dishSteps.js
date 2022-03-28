@@ -1,14 +1,14 @@
 import React from "react"
 
 function dishSteps(props) {
-  const { dish, isChef, isEdit, deleteItem, addItem, handleChange, textChange } = props
+  const { dish, isChef, isEdit, deleteItem, addItem, textChange } = props
 
-  function deleteButton(index) {
+  function deleteStepButton(index) {
     return (
       (isChef && isEdit) ? <button name="steps" id={index} onClick={(e) => deleteItem(e)}>X</button> : null)
   }
 
-  function addButton() {
+  function addStepButton() {
     return (
       (isChef && isEdit) ? <button name="steps" onClick={(e) => addItem(e)}>Add Step</button> : null)
   }
@@ -29,12 +29,11 @@ function dishSteps(props) {
           return (
             <div key={`${item}${index}`} className="steps-container">
               <div>
-                <h3>{`${index + 1}.`}</h3>
+                <h3 className="steps-number">{`${index + 1}.`}</h3>
                 <input type="checkbox" />
                 <textarea
-                  // FORCES CARET TO REMAIN IN PLACE FOR TYPING EACH LETTER AFTER RENDER
-                  autoFocus
-                  onFocus={moveCaretAtEnd}
+                  autoFocus                 // FORCES CARET TO REMAIN AFTER RENDER
+                  onFocus={moveCaretAtEnd}  // FORCES CARET AT END OF TEXTAREA VALUE
                   id={index}
                   name="steps"
                   type="text"
@@ -42,13 +41,13 @@ function dishSteps(props) {
                   value={item}
                   disabled={!isEdit}
                   onChange={(e) => textChange(e)} />
-                {deleteButton(index)}
+                {deleteStepButton(index)}
               </div>
             </div>
           )
         }) : null}
       <div className="steps-add">
-        {addButton()}
+        {addStepButton()}
       </div>
     </section>
   )

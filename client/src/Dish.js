@@ -6,7 +6,8 @@ import DishSteps from "./components/dishSteps"
 const { v4: uuidv4 } = require('uuid')
 
 function Dish(props) {
-  const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish, setDishMessage} = props
+  const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish, setActionMessage } = props
+
   const [updatedDish, setUpdatedDish] = useState(dish)
   const { _id } = updatedDish
 
@@ -15,7 +16,7 @@ function Dish(props) {
     setUpdatedDish(prevInput => ({ ...prevInput, [name]: value }))
   }
 
-  // USED FOR TEXT & TEXTAREA INPUTS 
+  // USED FOR TEXT & TEXTAREA INPUTS CHANGES
   const textChange = (e) => {
     const { id, name, value } = e.target
     const newArray = updatedDish[`${name}`].map((item, index) => {
@@ -51,41 +52,48 @@ function Dish(props) {
   // BUTTONS AT TOP & BOTTOM OF DISH EDIT PAGES
   function chefEditButtons() {
     const buttonText = () => {
-      return isEdit ? "Save" : "Edit"     //CHANGES EDIT BUTTON TEXT
+      return isEdit ? "Save" : "Edit"       // CHANGES EDIT BUTTON TEXT
     }
-    // NEW DISH BUTTONS
+    // WHEN ADDING NEW DISH BUTTONS
     if (isChef && isEdit && isBlankDish === true) {
       return (
         <Link to="/search">
           <button onClick={() => {
             return (
-              setIsEdit(),
-              setIsBlankDish(),
-              delete updatedDish[0],       // DELETES BLANK DISH
-              updatedDish._id = uuidv4(),
-              setDishMessage("add"),  // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
-              addDish(updatedDish))
+              setIsEdit(),                  // RESETS isEdit() bool
+              setIsBlankDish(),             // RESETS isBlankDish() bool
+              delete updatedDish[0],        // DELETES BLANK DISH
+              updatedDish._id = uuidv4(),   // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
+              setActionMessage("add"),        // MAKES "DISH ADDED" MESSAGE
+              addDish(updatedDish))         // NEW DISH OBJECT
           }}>{buttonText()}</button>
         </Link>)
-    // EDIT DISH "SAVE" BUTTON
+      // EDIT DISH "SAVE" BUTTON
     } else if (isChef && isEdit) {
       return (
         <Link to="/search">
           <div className="dish-button-container">
             <div>
-              <button onClick={() =>{ return (deleteDish(_id),setDishMessage("delete"))}}>DELETE</button>
+              <button onClick={() => {
+                return (
+                  deleteDish(_id),            // PASSES DISH ID TO DELETE DISH
+                  setActionMessage("delete"))   // MAKES "DISH DELETED" MESSAGE
+              }}>DELETE</button>
             </div>
             <button onClick={() => {
-              return (setIsEdit(), updateDish(_id, updatedDish), setDishMessage("edit"))
+              return (
+                setIsEdit(),                   // RESETS isEdit() bool
+                updateDish(_id, updatedDish),  // PASSES DISH ID & OBJ TO UPDATE
+                setActionMessage("edit"))        // MAKES "DISH EDITED" MESSAGE
             }}>{buttonText()}</button>
           </div>
         </Link>)
-    // EDIT DISH "EDIT" BUTTON
+      // EDIT DISH "EDIT" BUTTON
     } else if (isChef) {
       return (
         <button onClick={() => setIsEdit()}>{buttonText()}</button>)
     } else {
-    // COOK PAGES
+      // COOK PAGES
       return null
     }
   }
