@@ -20,7 +20,8 @@ p {
 
 textarea {
   font-family: serif;
-  overflow:scroll;
+  resize: vertical;
+  
 }
 
 input[type="text"]:disabled, 
@@ -34,12 +35,11 @@ textarea:disabled {
 nav {
   display: flex;
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content:space-between;
 }
 
 nav > div {
- margin-top: auto;
- margin-bottom: 1rem;
+ margin-top: 2.5rem;
 }
 
 nav div button {
@@ -47,14 +47,14 @@ nav div button {
   background-color: rgb(240, 10, 10);
   border-radius: 5px;
   width: 5rem;
-  height: 2rem;
-  margin-left: .5rem;
-  margin-bottom: .5rem;
+  height: 1.5rem;
+  margin: 0 1rem .3rem;
   font-weight: 600;
 }
 
 .header {
-  height: 4rem;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -65,7 +65,7 @@ nav div button {
 }
 
 .home a {
-  margin: 0rem;
+  margin: 0;
   text-decoration: none;
 }
 
@@ -80,7 +80,27 @@ nav div button {
   margin: 0;
 }
 
-
+@media (max-width: 700px) {
+  nav > div {
+    margin-top: 1rem;
+   }
+  .header {
+   min-height: 3rem;
+    
+  }
+  .home {
+    padding-top: 2rem;
+    flex-direction: column;
+  }
+  .home img {
+    height: 80%;
+    width: 80%;
+  }
+  .home a {
+    margin: 0 auto;
+    text-align: center;
+  }
+}
 /********** SEARCH PAGE**********/
 
 .search {
@@ -98,8 +118,16 @@ nav div button {
   1px 1px 0 white,
   -1px 1px 0 white,
   0px 5px 6px rgba(0, 0, 0, 0.53);
-  
 }
+
+.search > h2 {
+  text-align: center;
+  text-shadow: 0px 0px 0 white,
+  1px 1px 0 white,
+  -1px 1px 0 white,
+  0px 5px 6px rgba(0, 0, 0, 0.53);
+}
+
 
 .search-bar input[type="search"]::placeholder {
   color:#b9b9b9;
@@ -155,9 +183,11 @@ section h2 {
   width: 40%;
   height: 40%;
 }
+
 .dish-summary-image img {
   object-fit: contain;
   width: 100%;
+  max-height: 10rem;
 }
 
 .dish-summary-text {
@@ -181,7 +211,6 @@ section h2 {
   width: 100%;
   flex-basis: 70%;
   overflow: scroll;
-  
 }
 
 .dish-summary-text input[type="text"]:disabled,
@@ -196,20 +225,6 @@ a:link {
   color: black;
   text-decoration: none;
 }
-
-/* .summary-button-container {
- display: flex;
- justify-content: space-around;
- margin: 1rem 0 .5rem;
-}
-
-.summary-button-container button {
-  background-color:rgb(240, 10, 10);
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 8px;
-} */
-
 
 /********** DISH PAGES **********/
 
@@ -226,7 +241,8 @@ a:link {
 }
 
 .dish section {
-  padding-bottom: 3rem ;
+  min-width: fit-content;
+  padding: 3px 3px 3rem 3px;
 }
 
 .dish section h2 {

@@ -1,21 +1,22 @@
 import './App.css';
+import axios from "axios"
 import React, { useEffect, useState } from "react"
-import Nav from "./components/Nav"
 import Home from "./Home"
 import Search from "./Search"
 import Dish from "./Dish"
 import { Routes, Route } from "react-router-dom"
 import Error from "./components/Error"
-import axios from "axios"
+import Nav from "./components/Nav"
 import staticData from "./components/staticData"
 import blankDish from "./components/dishBlank"
 
 
 function App() {
   const [dishes, setDishes] = useState(staticData)
+  const [isBlankDish, setIsBlankDish] = useState(false)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [isBlankDish, setIsBlankDish] = useState(false)
+  const [dishMessage, setDishMessage] = useState(null)
 
   // DEFAULT DISH ON DISH PAGE
   const [selectDish, setSelectDish] = useState(dishes[0])
@@ -26,6 +27,7 @@ function App() {
     //   .catch(err => console.log(err))
   }, [])
 
+  // ALLOW INDIVIDUAL MAP WHEN DISH IS SELECTED 
   function clickedDish(id) {
     dishes.filter(item => {
       if (item._id === id) {
@@ -75,8 +77,10 @@ function App() {
                 isChef={isChef}
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(true)}
-                clickedDish={(id) => clickedDish(id)}
+                clickedDish={(id) => {return (clickedDish(id), setDishMessage(null))}}
                 setIsBlankDish={() => setIsBlankDish(true)}
+                dishMessage={dishMessage}
+                setDishMessage={setDishMessage}
               />} />
           <Route
             path="/dish"
@@ -89,18 +93,20 @@ function App() {
                 isEdit={isEdit}
                 setIsEdit={() => setIsEdit(!isEdit)}
                 updateDish={(id, updatedDish) => updateDish(id, updatedDish)}
+                setDishMessage={setDishMessage}
               />} />
           <Route
             path="/dishform"
             element={
               <Dish
-                isBlankDish={isBlankDish}
-                setIsBlankDish={() => setIsBlankDish(false)}
-                addDish={(updatedDish) => addDish(updatedDish)}
-                dish={blankDish}
-                isChef={isChef}
-                isEdit={isEdit}
-                setIsEdit={() => setIsEdit(!isEdit)}
+              isBlankDish={isBlankDish}
+              setIsBlankDish={() => setIsBlankDish(false)}
+              addDish={(updatedDish) => addDish(updatedDish)}
+              dish={blankDish}
+              isChef={isChef}
+              isEdit={isEdit}
+              setIsEdit={() => setIsEdit(!isEdit)}
+              setDishMessage={setDishMessage}
               />} />
           <Route
             path="*"

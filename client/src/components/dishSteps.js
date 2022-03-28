@@ -24,29 +24,29 @@ function dishSteps(props) {
   return (
     <section>
       <h2>Steps</h2>
-      {dish.steps?
-       dish.steps.map((item, index) => {
-        return (
-          <div key={`${item}${index}`} className="steps-container">
-            <div>
-              <h3>{`${index+1}.`}</h3>
-              <input type="checkbox" />
-              <textarea
-                // FORCES CARET TO REMAIN IN PLACE FOR TYPING EACH LETTER AFTER RENDER
-                autoFocus
-                onFocus={moveCaretAtEnd}
-                id={index}
-                name="steps"
-                type="text"
-                index={index}
-                value={item}
-                disabled={!isEdit}
-                onChange={(e) => textChange(e)} />
-              {deleteButton(index)}
+      {dish.steps ?
+        dish.steps.map((item, index) => {
+          return (
+            <div key={`${item}${index}`} className="steps-container">
+              <div>
+                <h3>{`${index + 1}.`}</h3>
+                <input type="checkbox" />
+                <textarea
+                  // FORCES CARET TO REMAIN IN PLACE FOR TYPING EACH LETTER AFTER RENDER
+                  autoFocus
+                  onFocus={moveCaretAtEnd}
+                  id={index}
+                  name="steps"
+                  type="text"
+                  index={index}
+                  value={item}
+                  disabled={!isEdit}
+                  onChange={(e) => textChange(e)} />
+                {deleteButton(index)}
+              </div>
             </div>
-          </div>
-        )
-      }): null }
+          )
+        }) : null}
       <div className="steps-add">
         {addButton()}
       </div>

@@ -3,14 +3,27 @@ import DishSummary from "./components/dishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
-  const { dishes, isChef, clickedDish, setIsEdit, setIsBlankDish } = props
+  const { dishes, isChef, clickedDish, setIsEdit, setIsBlankDish, dishMessage, setDishMessage } = props
   const [searchInput, setSearchInput] = useState("")
   const [filteredDishes, setFilteredDishes] = useState(dishes)
+
 
   function welcome() {
     return (isChef ?
       <h1>Welcome Chef!</h1> :
       <h1>Welcome Cook!</h1>)
+  }
+
+  function displayMessage() {
+    if (dishMessage === "add") {
+      return (<h2>Dish Added!</h2>)
+    } else if (dishMessage === "delete") {
+      return (<h2>Dish Deleted!</h2>)
+    } else if (dishMessage === "edit") {
+      return (<h2>Dish Edited!</h2>)
+    } else {
+      return null
+    }
   }
 
   function listDishes() {
@@ -19,12 +32,13 @@ function Search(props) {
         <Link
           to="/dish"
           key={dish._id}
-          onClick={() => clickedDish(dish._id)}>
+          onClick={() => { return (clickedDish(dish._id), setDishMessage(null)) }}>
           <DishSummary dish={dish} />
         </Link>)}
     </> : null)
   }
 
+  // SEARCH BAR FILTER FUNCTION 
   const filter = (e) => {
     const keyword = e.target.value
     if (keyword !== "") {
@@ -38,18 +52,24 @@ function Search(props) {
     setSearchInput(keyword)
   }
 
-  function chefButtons() {
+  // ADD BUTTON TO BLANK FORM
+  function chefButtons(dishes) {
     return (isChef ?
       <Link to="/dishform">
-        <button onClick={() =>{return (setIsEdit(true),setIsBlankDish())}}
+        <button onClick={() => {
+          return (
+            setIsEdit(true), setIsBlankDish(), setDishMessage(null))
+        }}
         >ADD DISH</button>
       </Link>
       : null)
   }
 
   return (
+    console.log(dishMessage),
     <div className="search">
       {welcome()}
+      {displayMessage()}
       <form className="search-bar">
         <input
           type="search"
@@ -59,7 +79,7 @@ function Search(props) {
         </input>
       </form>
       {listDishes()}
-      {chefButtons()}
+      {chefButtons(dishes)}
     </div>
   )
 }
