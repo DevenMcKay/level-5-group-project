@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import DishSummary from "./components/dishSummary"
+import DishSummary from "./components/DishSummary"
 import DishIngredients from "./components/dishIngredients"
 import DishSteps from "./components/dishSteps"
 const { v4: uuidv4 } = require('uuid')

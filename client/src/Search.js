@@ -1,5 +1,9 @@
-import React, { useState } from "react"
-import DishSummary from "./components/dishSummary"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
+
+
+
+import DishSummary from "./components/DishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
@@ -43,7 +47,7 @@ function Search(props) {
     const keyword = e.target.value
     if (keyword !== "") {
       const results = dishes.filter(dish => {
-        return dish.name.toLowerCase().includes(keyword.toLowerCase())
+        return dish.item.toLowerCase().includes(keyword.toLowerCase())
       })
       setFilteredDishes(results)
     } else {

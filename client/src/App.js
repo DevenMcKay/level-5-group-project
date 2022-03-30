@@ -7,11 +7,11 @@ import Dish from "./Dish"
 import { Routes, Route } from "react-router-dom"
 import Error from "./components/Error"
 import Nav from "./components/Nav"
-import staticData from "./components/staticData"
+// import staticData from "./components/staticData"
 import blankDish from "./components/dishBlank"
 
 function App() {
-  const [dishes, setDishes] = useState(staticData)
+  const [dishes, setDishes] = useState([])
   const [isBlankDish, setIsBlankDish] = useState(false)
   const [isChef, setIsChef] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
@@ -22,9 +22,9 @@ function App() {
 
   // GET ALL AXIOS BACKEND
   useEffect(() => {
-    // axios.get({staticData})
-    //   .then(res => setDishes(res.data))
-    //   .catch(err => console.log(err))
+    axios.get("/menu")
+      .then(res => setDishes(res.data))
+      .catch(err => console.log(err))
   }, [])
 
   // ALLOW INDIVIDUAL MAP WHEN DISH IS SELECTED 
@@ -38,12 +38,14 @@ function App() {
 
   // DELETE DISH
   function deleteDish(_id) {
-    const newArr = dishes.filter(dish => {
-      if (_id !== dish._id) {
-        return dish
-      }
-    })
-    setDishes(newArr)
+    axios.delete(`/${_id}`)
+    .then(res => console.log(res))
+    // const newArr = dishes.filter(dish => {
+    //   if (_id !== dish._id) {
+    //     return dish
+    //   }
+    // })
+    // setDishes(newArr)
   }
 
   // ADD DISH
@@ -63,6 +65,7 @@ function App() {
   }
 
   return (
+    console.log(dishes),
     <>
       <Nav isEdit={isEdit} setIsEdit={setIsEdit} setActionMessage={() => setActionMessage(null)} />
       <div className='background-image'>

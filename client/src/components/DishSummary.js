@@ -17,6 +17,7 @@ function DishSummary(props) {
   }
 
   return (
+    console.log(props),
     <section className="dish-summary">
       <div className="dish-summary-image">
         <img
@@ -25,7 +26,7 @@ function DishSummary(props) {
             currentTarget.src = "https://68.media.tumblr.com/5559ed717d6892b811f37c3ef7f54b4d/tumblr_ol33ucmRpG1vfmhilo1_500.png"
           }}
           src={dish.image}
-          alt={dish.name}
+          alt={dish.item}
         ></img>
       </div>
       <div className="dish-summary-text">
@@ -33,17 +34,17 @@ function DishSummary(props) {
         <input
           disabled={!isEdit}
           type="text"
-          name="name"
+          name="item"
           placeholder="Name"
-          value={dish.name ?? ""}     // PREVENTS REACT CONTROL VALUE ERROR 
+          value={dish.item}     // PREVENTS REACT CONTROL VALUE ERROR 
           onChange={(e) => handleChange(e)}
           className="summary-h1"
         ></input>
         <textarea
           disabled={!isEdit}
-          name="summary"
+          name="description"
           placeholder="Summary"
-          value={dish.summary}
+          value={dish.description}
           onChange={(e) => handleChange(e)}
           className="summary-p"
         ></textarea>
