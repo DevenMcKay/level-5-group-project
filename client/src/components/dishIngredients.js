@@ -7,6 +7,7 @@ function dishIngredients(props) {
     return (
       (isChef && isEdit) ? <button name="ingredients" id={index} onClick={(e) => deleteItem(e)}>X</button> : null)
   }
+  
   function addIngredientButton() {
     return (
       (isChef && isEdit) ? <button name="ingredients" className="ingredient-add" onClick={(e) => addItem(e)}>Add Ingredient</button> : null)

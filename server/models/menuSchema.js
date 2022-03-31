@@ -6,20 +6,13 @@ const Schema = mongoose.Schema
 //Menu Blueprint
 const menuSchema = new Schema({
     image: {
-        type: String 
+        type: String
     },
-    item: {
+    name: {
         type: String,
         required: true
     },
-    cost: {
-        type: Number,
-        required: true
-    },
-    description: {
-        type: String
-    },
-    type: {
+    summary: {
         type: String
     },
     ingredients: {

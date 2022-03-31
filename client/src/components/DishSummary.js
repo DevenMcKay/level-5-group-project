@@ -1,5 +1,4 @@
-import React, { useState } from "react"
-
+import React from "react"
 
 function DishSummary(props) {
   const { dish, isChef, isEdit, handleChange } = props
@@ -17,7 +16,6 @@ function DishSummary(props) {
   }
 
   return (
-    console.log(props),
     <section className="dish-summary">
       <div className="dish-summary-image">
         <img
@@ -34,17 +32,17 @@ function DishSummary(props) {
         <input
           disabled={!isEdit}
           type="text"
-          name="item"
+          name="name"
           placeholder="Name"
-          value={dish.item}     // PREVENTS REACT CONTROL VALUE ERROR 
+          value={dish.name || ""}     // PREVENTS REACT CONTROL VALUE ERROR 
           onChange={(e) => handleChange(e)}
           className="summary-h1"
         ></input>
         <textarea
           disabled={!isEdit}
-          name="description"
+          name="summary"
           placeholder="Summary"
-          value={dish.description}
+          value={dish.summary}
           onChange={(e) => handleChange(e)}
           className="summary-p"
         ></textarea>

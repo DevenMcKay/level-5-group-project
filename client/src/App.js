@@ -22,7 +22,7 @@ function App() {
 
   // GET ALL AXIOS BACKEND
   useEffect(() => {
-    axios.get("/menu")
+    axios.get("/menu/search")
       .then(res => setDishes(res.data))
       .catch(err => console.log(err))
   }, [])
@@ -38,23 +38,30 @@ function App() {
 
   // DELETE DISH
   function deleteDish(_id) {
-    axios.delete(`/${_id}`)
-    .then(res => console.log(res))
-    // const newArr = dishes.filter(dish => {
-    //   if (_id !== dish._id) {
-    //     return dish
-    //   }
-    // })
-    // setDishes(newArr)
+    axios.delete(`/menu/dish/${_id}`)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
+    const newArr = dishes.filter(dish => {
+      if (_id !== dish._id) {
+        return dish
+      }
+    })
+    setDishes(newArr)
   }
 
   // ADD DISH
   function addDish(updatedDish) {
-    setDishes(prevInput => [...prevInput, updatedDish])
+    if (updatedDish[0] === undefined) {
+      updatedDish = { ...updatedDish, name:"?"}    // FILLS IN NAME IF ONE IS NOT PRESENT 
+    }
+    axios.post("/menu/dish", updatedDish)
+      .then(res => setDishes(prevInput => [...prevInput, res.data]))
+      .catch(err => console.log(err))
   }
 
   // UPDATE DISH
   function updateDish(id, updatedDish) {
+    axios.put(`/menu/dish/${id}`, updatedDish)
     const newArr = dishes.map(dish => {
       if (dish._id === id) {
         return updatedDish
@@ -65,7 +72,6 @@ function App() {
   }
 
   return (
-    console.log(dishes),
     <>
       <Nav isEdit={isEdit} setIsEdit={setIsEdit} setActionMessage={() => setActionMessage(null)} />
       <div className='background-image'>
@@ -76,7 +82,7 @@ function App() {
               <Home
                 setIsChef={setIsChef} />} />
           <Route
-            path="/search"
+            path="/menu/search"
             element={
               <Search
                 dishes={dishes}
@@ -89,7 +95,7 @@ function App() {
                 setActionMessage={setActionMessage}
               />} />
           <Route
-            path="/dish"
+            path="/menu/dish"
             element={
               <Dish
                 dish={selectDish}
@@ -102,7 +108,7 @@ function App() {
                 setActionMessage={setActionMessage}
               />} />
           <Route
-            path="/dishform"
+            path="/menu/dishform"
             element={
               <Dish
                 dish={blankDish}

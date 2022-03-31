@@ -7,25 +7,25 @@ const mongoose = require("mongoose")
 app.use(express.json())
 app.use(morgan("dev"))
 
+//ROUTES
+    //1.Endpoint 2.Callback function
+app.use("/menu", require("./routes/menuRoute"))
+
+
 //Connect to Database
 mongoose.connect("mongodb://localhost:27017/menudb", () => console.log("connected to database"))
 
 
-    //ROUTES
-        //1.Endpoint 2.Callback function
-app.use("/menu", require("./routes/menuRoute"))
+//     //Middleware and Next
+// app.use("/home", (req, res, next) => {
+//     console.log("Home Route")
+//     next()
+// })
 
-
-    //Middleware and Next
-app.use("/home", (req, res, next) => {
-    console.log("Home Route")
-    next()
-})
-
-app.get("/home", (req, res, next) => {
-    console.log("get req received")
-    res.send("Home Page")
-})
+// app.get("/home", (req, res, next) => {
+//     console.log("get req received")
+//     res.send("Home Page")
+// })
 
     //Error handler
 app.use((err, req, res, next) => {

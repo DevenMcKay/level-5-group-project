@@ -9,7 +9,7 @@ export default function Nav(props) {
     <nav>
       <div>
         <Link
-          to={"/search"}>
+          to={"/menu/search"}>
           <button>Search</button>
         </Link>
       </div>
