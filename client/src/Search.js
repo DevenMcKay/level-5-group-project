@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
-
-
-
 import DishSummary from "./components/DishSummary"
 import { Link } from "react-router-dom"
 
 function Search(props) {
   const { dishes, isChef, clickedDish, setIsEdit, setIsBlankDish, actionMessage, setActionMessage } = props
+
   const [searchInput, setSearchInput] = useState("")
   const [filteredDishes, setFilteredDishes] = useState(dishes)
 
+  useEffect(() => {
+    setFilteredDishes(dishes)
+  }, [dishes])
 
   function welcomeMessage() {
     return (isChef ?
@@ -34,7 +34,7 @@ function Search(props) {
     return (filteredDishes ? <>
       {filteredDishes.map(dish =>
         <Link
-          to="/dish"
+          to="/menu/dish"
           key={dish._id}
           onClick={() => { return (clickedDish(dish._id), setActionMessage(null)) }}>
           <DishSummary dish={dish} />
@@ -47,7 +47,7 @@ function Search(props) {
     const keyword = e.target.value
     if (keyword !== "") {
       const results = dishes.filter(dish => {
-        return dish.item.toLowerCase().includes(keyword.toLowerCase())
+        return dish.name.toLowerCase().includes(keyword.toLowerCase())
       })
       setFilteredDishes(results)
     } else {
@@ -59,7 +59,7 @@ function Search(props) {
   // ADD BUTTON LEADS TO BLANK FORM
   function chefAddButton() {
     return (isChef ?
-      <Link to="/dishform">
+      <Link to="/menu/dishform">
         <button onClick={() => {
           return (
             setIsEdit(true),      // INPUT ENABLE ON NEW DISH PAGE
@@ -80,7 +80,7 @@ function Search(props) {
           type="search"
           placeholder="Search dish title..."
           value={searchInput}
-          onChange={(e)=>filter(e)}>
+          onChange={(e) => filter(e)}>
         </input>
       </form>
       {listDishes()}

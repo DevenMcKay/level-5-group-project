@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import DishSummary from "./components/DishSummary"
 import DishIngredients from "./components/dishIngredients"
 import DishSteps from "./components/dishSteps"
-const { v4: uuidv4 } = require('uuid')
+// const { v4: uuidv4 } = require('uuid')
 
 function Dish(props) {
   const { dish, isChef, isEdit, setIsEdit, deleteDish, addDish, isBlankDish, setIsBlankDish, updateDish, setActionMessage } = props
@@ -57,22 +57,24 @@ function Dish(props) {
     // WHEN ADDING NEW DISH BUTTONS
     if (isChef && isEdit && isBlankDish === true) {
       return (
-        <Link to="/search">
-          <button onClick={() => {
-            return (
-              setIsEdit(),                  // RESETS isEdit() bool
-              setIsBlankDish(),             // RESETS isBlankDish() bool
-              delete updatedDish[0],        // DELETES BLANK DISH
-              updatedDish._id = uuidv4(),   // REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
-              setActionMessage("add"),        // MAKES "DISH ADDED" MESSAGE
-              addDish(updatedDish))         // NEW DISH OBJECT
-          }}>{buttonText()}</button>
-        </Link>)
+        <div id="new-dish-save">
+          <Link to="/menu/search">
+            <button onClick={() => {
+              return (
+                setIsEdit(),                  // RESETS isEdit() bool
+                setIsBlankDish(),             // RESETS isBlankDish() bool
+                delete updatedDish[0],        // DELETES BLANK DISH
+                // updatedDish._id = uuidv4(),   REMOVE: CREATES ID (MONGOOSE WILL DO THIS)
+                setActionMessage("add"),        // MAKES "DISH ADDED" MESSAGE
+                addDish(updatedDish))         // NEW DISH OBJECT
+            }}>{buttonText()}</button>
+          </Link>
+        </div>)
       // EDIT DISH "SAVE" BUTTON
     } else if (isChef && isEdit) {
       return (
-        <Link to="/search">
-          <div className="dish-button-container">
+        <div className="dish-button-container">
+          <Link to="/menu/search">
             <div>
               <button onClick={() => {
                 return (
@@ -80,18 +82,23 @@ function Dish(props) {
                   setActionMessage("delete"))   // MAKES "DISH DELETED" MESSAGE
               }}>DELETE</button>
             </div>
+          </Link>
+          <Link to="/menu/search">
             <button onClick={() => {
               return (
                 setIsEdit(),                   // RESETS isEdit() bool
                 updateDish(_id, updatedDish),  // PASSES DISH ID & OBJ TO UPDATE
                 setActionMessage("edit"))        // MAKES "DISH EDITED" MESSAGE
             }}>{buttonText()}</button>
-          </div>
-        </Link>)
+
+          </Link>
+        </div>)
       // EDIT DISH "EDIT" BUTTON
     } else if (isChef) {
       return (
-        <button onClick={() => setIsEdit()}>{buttonText()}</button>)
+        <div className="button-container">
+          <button onClick={() => setIsEdit()}>{buttonText()}</button>
+        </div>)
     } else {
       // COOK PAGES
       return null

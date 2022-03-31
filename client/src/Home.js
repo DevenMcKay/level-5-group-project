@@ -4,17 +4,18 @@ import ChefLogo from "./components/images/chef.png"
 import CookLogo from "./components/images/cook.png"
 
 function Home(props) {
+  const { setIsChef } = props
 
   return (
     <div className="home">
       <Link
-        to="/search"
-        onClick={() => props.setIsChef(false)}>
+        to="/menu/search"
+        onClick={() => setIsChef(false)}>
         <img src={CookLogo} alt="cook button logo" ></img>
       </Link>
       <Link
-        to="/search"
-        onClick={() => props.setIsChef(true)}>
+        to="/menu/search"
+        onClick={() => setIsChef(true)}>
         <img src={ChefLogo} alt="chef button logo" ></img>
       </Link>
     </div>
