@@ -51,9 +51,9 @@ function App() {
 
   // ADD DISH
   function addDish(updatedDish) {
-    if (updatedDish[0] === undefined) {
-      updatedDish = { ...updatedDish, name:"?"}    // FILLS IN NAME IF ONE IS NOT PRESENT 
-    }
+    // if (updatedDish[0] === undefined) {
+    //   updatedDish = { ...updatedDish, name:"?"}    // FILLS IN NAME IF ONE IS NOT PRESENT 
+    // }
     axios.post("/menu/dish", updatedDish)
       .then(res => setDishes(prevInput => [...prevInput, res.data]))
       .catch(err => console.log(err))
