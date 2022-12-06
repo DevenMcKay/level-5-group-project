@@ -3,7 +3,7 @@ const menuRouter = express.Router()
 const Menu = require("../models/menuSchema")
 
 //Routes
-//get All menu items
+// get All menu items
 menuRouter.get("/search", (req, res, next) => {
     Menu.find((err, items) => {
         if (err) {

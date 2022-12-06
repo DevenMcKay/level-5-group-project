@@ -72,6 +72,7 @@ function App() {
   }
 
   return (
+    console.log(dishes),
     <>
       <Nav isEdit={isEdit} setIsEdit={setIsEdit} setActionMessage={() => setActionMessage(null)} />
       <div className='background-image'>

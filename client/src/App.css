@@ -267,12 +267,15 @@ a:link {
 .steps-container input[type="checkbox"] {
   transform: scale(2);
   position: relative;
-  top: 25%;
+  align-self: center;
   margin-right: 1rem;
+  height: 50%;
 }
 
 .steps-container input[type="checkbox"] {
-  top: 45%;
+  align-self: center;
+  top: 0%;
+  height: 20%;
 }
 
 /* aligns step&ingred input checks, text, & deletes */
