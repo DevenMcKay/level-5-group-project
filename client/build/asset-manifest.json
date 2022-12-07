@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.55edac89.css",
+    "main.js": "/static/js/main.5af14b67.js",
+    "static/media/modLogo.png": "/static/media/modLogo.f142a7f21184c8d4bc2c.png",
+    "static/media/background.jpg": "/static/media/background.c4c6fd8fa16f29f09473.jpg",
+    "static/media/cook.png": "/static/media/cook.6f636d453d5b77120874.png",
+    "static/media/chef.png": "/static/media/chef.60030e3497904390fa3f.png",
+    "index.html": "/index.html",
+    "main.55edac89.css.map": "/static/css/main.55edac89.css.map",
+    "main.5af14b67.js.map": "/static/js/main.5af14b67.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.55edac89.css",
+    "static/js/main.5af14b67.js"
+  ]
+}
